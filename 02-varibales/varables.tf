@@ -6,8 +6,13 @@ variable "ami_id" {
 
 variable "instance_type" {
     type = string
-    default = "t3.micro"
+    #default = "t3.micro"
     description = "Type of instance for EC2"
+
+    validation {
+      condition = contains(["t3.micro","t3.small","t3.large","t3.medium"],var.instance_type)
+      error_message = "The instance_type must be one of : t3.micro, t3.small, t3.medium, t3.large"
+    }
 }
 
 variable "ec2-tags" {
